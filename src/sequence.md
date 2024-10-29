@@ -1,0 +1,3 @@
+# Sequence Diagram
+
+In this section, I will present and explain two sequence diagrams representing my daily routine. The first diagram illustrates the communication and flow between tasks, showing how one task leads to the next. The second diagram focuses on how each task calls specific functions to complete the overall process. These diagrams provide a detailed view of how my routine operates both in terms of task interaction and function execution.
