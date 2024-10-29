@@ -4,20 +4,29 @@ For the second sequence diagram, I will demonstrate how my tasks call specific f
 
 
 ```plantuml
-skinparam backgroundColor transparent
 @startuml
-participant User as U
-participant Kitchen
-participant Breakfast
-participant Elevator
+actor Me
+participant TaskBreakfast
+participant PrepareBreakfast as FunctionBreakfast
+participant TaskElevator
 
-U -> Kitchen : Go to the kitchen
-Kitchen -> Breakfast : Call prepare breakfast function
-Breakfast -> Kitchen : Toasts with eggs and tea ready
+Me -> TaskBreakfast : Start Task
+TaskBreakfast -> FunctionBreakfast : Prepare Breakfast(Hungry)
+alt Hunger TRUE
+    FunctionBreakfast -> TaskBreakfast : Return Breakfast ready = TRUE
+    TaskBreakfast -> TaskBreakfast : Set Eat breakfast = TRUE
+else Hunger FALSE
+    FunctionBreakfast -> TaskBreakfast : Return Breakfast ready = FALSE
+    TaskBreakfast -> TaskBreakfast : Set Eat breakfast = FALSE
+end
 
-U -> Breakfast : Eat breakfast
-U -> Elevator : Go to the elevator
-Elevator -> Elevator : Call wait for elevator function
-Elevator -> U : Enter the elevator
+Me -> TaskElevator : Start Task
+TaskElevator -> TaskElevator : Check Eat breakfast
+alt Eat breakfast = TRUE
+    TaskElevator -> TaskElevator : Begin Elevator Process
+else Eat breakfast = FALSE
+    TaskElevator -> TaskElevator : Begin Elevator Process
+end
+TaskElevator -> Me : Task Complete
 @enduml
 ```
