@@ -8,21 +8,20 @@ The second task represents my routine after finishing breakfast and heading to t
 
 state Elevator {
     [*] --> CallElevator : Press button, wait for elevator
-    CallElevator --> EnterElevator : Enter on arrival, select floor
+    CallElevator --> EnterElevator : Enter on arrival, select floor 1
     EnterElevator --> ArriveGroundFloor : Descend to ground floor
     ArriveGroundFloor --> ExitElevator : Leave elevator
 }
 
 state WalkToUniversity {
     [*] --> ExitBuilding : Head towards building exit
-    ExitBuilding --> StartWalk : Determine path to university
-    StartWalk --> WalkToCampus : Proceed along path (Duration: 3-5 min)
+    ExitBuilding --> StartWalk : think of the path to university
+    StartWalk --> WalkToCampus : Proceed along path
     WalkToCampus --> EnterUniversity : Reach university entrance
-    EnterUniversity --> NavigateToClassroom : Head to designated classroom
+    EnterUniversity --> WalkToClassroom : Head to designated classroom
 }
 
 Elevator --> WalkToUniversity : Exit elevator
 WalkToUniversity --> [*] : Arrive at classroom
 @enduml
-
 ```
