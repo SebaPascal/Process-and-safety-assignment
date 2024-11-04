@@ -1,3 +1,3 @@
 # Conclusion
 
--Put a conclusion about the complete process about the daily routine and create a book with all the info
+Working with mdBook, PlantUML, and TwinCAT to model my daily routine was both challenging and rewarding. Each tool brought a unique element: mdBook structured my documentation, PlantUML helped visualize each step, and TwinCAT allowed me to implement the logic in a PLC program. The project pushed me to refine both my process design and programming skills, giving me a stronger grasp on control logic and variable management. Despite some hurdles, I enjoyed seeing how each part fit together, and the experience left me more confident in using these tools in future projects that blend visualization, documentation, and real-world applications.
