@@ -4,6 +4,7 @@ My first task focuses on my morning routine when I get up take a shower and have
 
 ```plantuml
 @startuml
+
 [*] -l-> WakeUp : Start Routine
 
 state WakeUp {

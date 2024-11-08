@@ -1,19 +1,25 @@
 # PLC Program
 
-My first task is about my breakfast routine, i skipped a few steps but this part of the code works like this:
+## GVL
 
-_First Task_ 
+This section contains my Global Variable List (GVL), where I defined the shared variables accessible across different tasks in the program.
 
-This part of the code works with me going to the kitchen, preparing breakfast, eating and then to elevator.
+![GVL](/images/GVL.png)
 
--insert code
+## First Task
 
-_Second task_
+The first task manages the initial processes in the program flow. It reads and updates specific variables from the GVL, depending on states and timers. This task represents the process of me feeling hungry and heading to the kitchen. Once there, three timers (TON) begin counting, representing the preparation of my food. When these timers finish, the task progresses to the eating stage, followed by heading to the elevator, which triggers the start of the second task.
 
-This part of the code works with me going to the elevator, coming down from my building and then going to the university.
+![Breakfast](/images/BreakfastPRG.png)
 
--Insert code
+## Second task
 
-_Function called_
+The second task is another independent process running in parallel with the first. In this code, after reaching the first floor, I need to check whether I have classes. If I have no classes, the task adjusts, directing me to go to the gym instead
 
-This function is used for the preparation of my breakfast which consists of preparing eggs, toasting bread and making tea.
+![Elevator](/images/ElevatorPRG.png)
+
+## Function called
+
+This section describes a simple function called by the elevator task. The function, triggered by a global variable "check_class", activates upon reaching the first floor. If classes are scheduled, the function sets an output to true, guiding me to class; otherwise, it returns false, directing me to head to the gym.
+
+![Function](/images/Function.png)
