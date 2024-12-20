@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
+  <Task Name="MorningBreakfast" Id="{b09b5c32-31aa-4f75-91e5-4085d204858e}">
+    <!--CycleTime in micro seconds.-->
+    <CycleTime>10000</CycleTime>
+    <Priority>1</Priority>
+    <PouCall>
+      <Name>MormingBreakfastTask</Name>
+    </PouCall>
+    <TaskFBGuid>{bc3fe064-3ba5-4d27-8257-2ee18067f149}</TaskFBGuid>
+    <Fb_init>{dbbc3cc8-5ee7-48dc-9c30-69be6fe8fd13}</Fb_init>
+    <Fb_exit>{ce2c8d7a-ab98-422f-bb4b-38b8de28fc38}</Fb_exit>
+    <CycleUpdate>{90a736c5-1076-44c7-8ff4-30b2a9ce333f}</CycleUpdate>
+    <PostCycleUpdate>{1a834e6b-1aa2-4d59-9aa3-3dbfda501aff}</PostCycleUpdate>
+  </Task>
+</TcPlcObject>

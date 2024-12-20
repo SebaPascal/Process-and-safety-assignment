@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
+  <POU Name="ElevatorFunction" Id="{c8d8a544-3236-4d33-bbe5-b48a60f9b991}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION ElevatorFunction : BOOL
+
+VAR_INPUT
+	bCheckClass 	: BOOL;
+END_VAR
+
+VAR
+	bMyDecision : BOOL;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[IF bCheckClass THEN
+	ElevatorFunction := TRUE;
+ELSE
+	ElevatorFunction := FALSE;
+END_IF]]></ST>
+    </Implementation>
+    <LineIds Name="ElevatorFunction">
+      <LineId Id="7" Count="0" />
+      <LineId Id="9" Count="0" />
+      <LineId Id="11" Count="1" />
+      <LineId Id="10" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

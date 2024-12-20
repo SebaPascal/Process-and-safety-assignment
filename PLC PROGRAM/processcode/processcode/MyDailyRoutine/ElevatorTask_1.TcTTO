@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
+  <Task Name="ElevatorTask_1" Id="{3b951248-b6c6-4968-95e1-fd30909f1ba1}">
+    <!--CycleTime in micro seconds.-->
+    <CycleTime>5000</CycleTime>
+    <Priority>2</Priority>
+    <PouCall>
+      <Name>ElevatorTask</Name>
+    </PouCall>
+    <TaskFBGuid>{e0509dc5-9cc4-41a1-9245-04a234965ca8}</TaskFBGuid>
+    <Fb_init>{c1c7bd9a-ec33-4011-a4ed-a51fe199b27a}</Fb_init>
+    <Fb_exit>{bbdc8fa0-e583-40d1-87b6-59464fdefeac}</Fb_exit>
+    <CycleUpdate>{83b9771e-eca5-49c0-8822-b66d003c7386}</CycleUpdate>
+    <PostCycleUpdate>{381011db-ef33-4291-a06d-0fd23e06e32f}</PostCycleUpdate>
+  </Task>
+</TcPlcObject>

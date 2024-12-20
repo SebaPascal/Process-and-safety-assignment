@@ -1,0 +1,97 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
+  <POU Name="ElevatorTask" Id="{f124a62b-2626-46c8-805b-bc427e24398b}" SpecialFunc="None">
+    <Declaration><![CDATA[PROGRAM ElevatorTask
+VAR
+	//Varibles booleans
+	bAllPrepared 		: BOOL;
+	bPressButton 		: BOOL;
+	bElevatorArrives 	: BOOL;
+	bEnterElevator 		: BOOL;
+	bPressFirstFloor	: BOOL;
+	bCheckClass 		: BOOL;
+	bGoToUniversity 	: BOOL;
+	bGoToGym			: BOOL;
+	bDone				: BOOL;
+	//Variables timers	
+	fbGoToElevator 		: TON;
+	fbWaitElevator 		: TON;
+	fbGoToFirstFloor 	: TON;
+	fbWalkToUniversity	: TON;
+	fbWalkToClassroom	: TON;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[//First step: When i finish my breakfast i prepare my thing and go to take the elevator
+	IF GVL.bReady THEN
+		bAllPrepared := TRUE;
+		fbGoToElevator(IN:=bAllPrepared,PT:=T#3S);
+	END_IF
+
+	IF fbGoToElevator.Q THEN
+		bPressButton := TRUE;
+		fbWaitElevator(IN:=bPressButton,PT:=T#3S);
+	END_IF
+	
+	IF fbWaitElevator.Q THEN
+		bElevatorArrives := TRUE;
+		bEnterElevator :=bElevatorArrives;
+		bPressFirstFloor := bEnterElevator;
+		fbGoToFirstFloor(IN:=bPressFirstFloor,PT:=T#4S);
+	END_IF
+//Second step: When im in the first floor i decide where i want to go
+
+	bCheckClass := ElevatorFunction(bCheckClass := fbGoToFirstFloor.Q);		//Function
+	
+	IF bCheckClass THEN
+		bGoToUniversity := TRUE;
+		bGoToGym := FALSE;
+	ELSE
+		bGoToUniversity := FALSE;
+		bGoToGym := TRUE;
+	END_IF
+
+//Third step: Go to university and classroom
+
+	fbWalkToUniversity(IN:=bGoToUniversity,PT:=T#5S);
+	fbWalkToClassroom(IN:=fbWalkToUniversity.Q,PT:=T#5S);
+	
+	bDone := fbWalkToClassroom.Q;											//Me in classroom
+	]]></ST>
+    </Implementation>
+    <LineIds Name="ElevatorTask">
+      <LineId Id="20" Count="0" />
+      <LineId Id="5" Count="0" />
+      <LineId Id="14" Count="0" />
+      <LineId Id="11" Count="1" />
+      <LineId Id="16" Count="0" />
+      <LineId Id="15" Count="0" />
+      <LineId Id="17" Count="0" />
+      <LineId Id="19" Count="0" />
+      <LineId Id="18" Count="0" />
+      <LineId Id="22" Count="0" />
+      <LineId Id="21" Count="0" />
+      <LineId Id="23" Count="0" />
+      <LineId Id="26" Count="0" />
+      <LineId Id="28" Count="0" />
+      <LineId Id="31" Count="0" />
+      <LineId Id="24" Count="0" />
+      <LineId Id="33" Count="0" />
+      <LineId Id="49" Count="0" />
+      <LineId Id="48" Count="0" />
+      <LineId Id="52" Count="0" />
+      <LineId Id="65" Count="1" />
+      <LineId Id="75" Count="0" />
+      <LineId Id="73" Count="0" />
+      <LineId Id="76" Count="0" />
+      <LineId Id="74" Count="0" />
+      <LineId Id="67" Count="0" />
+      <LineId Id="69" Count="0" />
+      <LineId Id="47" Count="0" />
+      <LineId Id="71" Count="0" />
+      <LineId Id="80" Count="1" />
+      <LineId Id="84" Count="1" />
+      <LineId Id="82" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

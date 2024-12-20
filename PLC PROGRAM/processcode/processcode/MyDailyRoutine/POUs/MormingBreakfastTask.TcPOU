@@ -1,0 +1,76 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
+  <POU Name="MormingBreakfastTask" Id="{b26e7558-b806-4d64-b9a0-6213d32beadb}" SpecialFunc="None">
+    <Declaration><![CDATA[PROGRAM MormingBreakfastTask
+VAR
+	//Variables booleans
+	bHungry 			: BOOL;
+	bStartPreparation 	: BOOL;
+	bStartEat 			: BOOL;
+	bReady 				: BOOL;
+	//Variables timers
+	fbGoToKitchen 		: TON;
+	fbDecideIfIEat 		: TON;
+	fbPrepareTea 		: TON;
+	fbPrepareEggs 		: TON;
+	fbPrepareBread 		: TON;
+	fbImEating 			: TON;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[//First step: Get up and decide if want to eat breakfast
+
+fbDecideIfIEat(IN:=GVL.bGetUp,PT:=T#3S);
+
+IF fbDecideIfIEat.Q THEN
+	bHungry := TRUE;
+END_IF
+fbGoToKitchen(IN:=bHungry,PT:=T#3S);
+
+//Second Step: Now in the kitchen im going to prepare my breakfast
+
+IF fbGoToKitchen.Q THEN
+	bStartPreparation := TRUE;
+END_IF
+
+fbPrepareTea(IN:=bStartPreparation,PT:=T#7S);     //Im going to use this .Q because it is the last to finish when i cook
+fbPrepareBread(IN:=bStartPreparation,PT:=T#3S);
+fbPrepareEggs(IN:=bStartPreparation,PT:=T#5S);
+
+//Third step: Finally i end the preparation and start to eat
+
+IF fbPrepareTea.Q AND NOT bStartEat THEN
+    bStartEat := TRUE;
+END_IF
+
+fbImEating(IN := bStartEat, PT := T#10S);
+
+GVL.bReady := fbImEating.Q;
+
+
+]]></ST>
+    </Implementation>
+    <LineIds Name="MormingBreakfastTask">
+      <LineId Id="15" Count="0" />
+      <LineId Id="21" Count="0" />
+      <LineId Id="18" Count="0" />
+      <LineId Id="23" Count="3" />
+      <LineId Id="5" Count="0" />
+      <LineId Id="32" Count="0" />
+      <LineId Id="31" Count="0" />
+      <LineId Id="35" Count="0" />
+      <LineId Id="33" Count="0" />
+      <LineId Id="36" Count="1" />
+      <LineId Id="43" Count="0" />
+      <LineId Id="40" Count="0" />
+      <LineId Id="13" Count="0" />
+      <LineId Id="44" Count="0" />
+      <LineId Id="46" Count="0" />
+      <LineId Id="45" Count="0" />
+      <LineId Id="48" Count="0" />
+      <LineId Id="70" Count="7" />
+      <LineId Id="69" Count="0" />
+      <LineId Id="64" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>
